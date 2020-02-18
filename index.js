@@ -31,28 +31,32 @@ connection.connect(err => {
 });
 
 function promptUser() {
-  inquirer.prompt([
-  {
-    type: 'list',
-    name: "request",
-    message: "What would you like to do?",
-    choices: [
-        'View All Employees',
-        'View All Employees By Department',
-        'View All Employees By Manager',
-        'Add Employee',
-        'Remove Employee',
-        'Update Employee Role',
-        'Update Employee Manager',
-        'View All Roles',
-        'Add Role',
-        'Remove Role',
-        'View All Departments',
-    ],           
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "request",
+        message: "What would you like to do?",
+        choices: [
+          "View All Employees",
+          "View All Employees By Department",
+          "View All Employees By Manager",
+          "Add Employee",
+          "Remove Employee",
+          "Update Employee Role",
+          "Update Employee Manager",
+          "View All Roles",
+          "Add Role",
+          "Remove Role",
+          "View All Departments"
+        ]
+      }
+    ])
+    .then(action => {
+      switch (action.request) {
+        case "View All Employees":
+          sendEmployees();
+          break;
+      }
+    });
 }
-])
-.then(action => {
-    switch (action.request) {
-    case "View All Employees":
-        sendEmployees(); 
-        break;

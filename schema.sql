@@ -1,0 +1,32 @@
+DROP DATABASE IF EXISTS employee_trackerDB;
+
+CREATE DATABASE employee_trackerDB;
+
+USE employee_trackerDB;
+
+CREATE TABLE department (
+    id INT NOT NULL AUTO_INCREMENT,
+    NAME VARCHAR(30) NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE role (
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(30) NULL,
+    salary DECIMAL NOT NULL,
+    department_id INT NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT FK_DepartmentRole FOREIGN KEY (department_id),
+	REFERENCES department(id),
+	ON DELETE CASCADE,
+	ON UPDATE CASCADE,
+);
+
+CREATE TABLE employee (
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(30) NULL,
+    last_name VARCHAR(30) NULL,
+    role_id INT NOT NULL,
+    manager_id INT NULL,
+    PRIMARY KEY(id),
+);
