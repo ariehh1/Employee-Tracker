@@ -3,6 +3,7 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const CFonts = require("cfonts");
+const cTable = require("console.table");
 
 CFonts.say("Employee|Manager", {
   font: "block", // define the font face
@@ -17,13 +18,13 @@ CFonts.say("Employee|Manager", {
   independentGradient: false // define if you want to recalculate the gradient for each new line
 });
 
-const promptMessages = {
-  songsByArtist: "Find songs by artist",
-  artistsMoreThanOnce: "Find all artists who appear more than once",
-  dataWithinRange: "Find data within a specific range",
-  searchForSong: "Search for a specific song",
-  exit: "exit"
-};
+// const promptMessages = {
+//   songsByArtist: "Find songs by artist",
+//   artistsMoreThanOnce: "Find all artists who appear more than once",
+//   dataWithinRange: "Find data within a specific range",
+//   searchForSong: "Search for a specific song",
+//   exit: "exit"
+// };
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -62,15 +63,30 @@ function promptUser() {
           "View All Roles",
           "Add Role",
           "Remove Role",
-          "View All Departments"
+          "View All Departments",
+          "Exit"
         ]
       }
     ])
     .then(action => {
       switch (action.request) {
         case "View All Employees":
-          sendEmployees();
+          viewAllEmployees();
           break;
+        default:
+          console.log("Thank you for using the application!");
+          connection.end();
       }
     });
 }
+
+function viewAllEmployees() {
+  connection.query("SELECT * FROM employee", (err, res) => {
+    if (err) throw err;
+    // Log all results of the SELECT statement
+    console.table(res);
+    promptUser();
+  });
+}
+
+//conection.end at very very end of functions
