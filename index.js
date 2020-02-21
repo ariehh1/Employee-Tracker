@@ -4,6 +4,7 @@ const inquirer = require("inquirer");
 const mysql = require("mysql");
 const CFonts = require("cfonts");
 const cTable = require("console.table");
+const db = require('./db');
 
 CFonts.say("Employee|Manager", {
   font: "block", // define the font face
@@ -17,14 +18,6 @@ CFonts.say("Employee|Manager", {
   gradient: false, // define your two gradient colors
   independentGradient: false // define if you want to recalculate the gradient for each new line
 });
-
-// const promptMessages = {
-//   songsByArtist: "Find songs by artist",
-//   artistsMoreThanOnce: "Find all artists who appear more than once",
-//   dataWithinRange: "Find data within a specific range",
-//   searchForSong: "Search for a specific song",
-//   exit: "exit"
-// };
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -83,6 +76,14 @@ function viewAllEmployees() {
     console.table(res);
     promptUser();
   });
+
+  function viewAllEmployeesByDepartment() {
+    connection.query(, (err, res) => {
+if(err) throw err;
+console.table(res);
+promptUser();
+    });
+  
 }
 
 //conection.end at very very end of functions
