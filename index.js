@@ -4,7 +4,7 @@ const inquirer = require("inquirer");
 const mysql = require("mysql");
 const CFonts = require("cfonts");
 const consoleTable = require("console.table");
-const db = require('./db');
+const db = require("./db");
 
 CFonts.say("Employee|Tracker", {
   font: "block", // define the font face
@@ -66,12 +66,58 @@ function promptUser() {
         case "View All Employees":
           viewAllEmployees();
           break;
-        default:
-          console.log("Thank you for using the application!");
-          connection.end();
+
+        case "View All Roles":
+          viewAllRoles();
+          break;
+
+        case "View All Departments":
+          viewAllDepartments();
+          break;
+
+        case "Add Employee":
+          addEmployee();
+          break;
+
+        case "Add Role":
+          addRole();
+          break;
+
+        case "Add Department":
+          addDepartment();
+          break;
+
+        case "Update Employee Role":
+          updateEmployeeRole();
+          break;
+
+        case "Update Employee Manager":
+          updateEmployeeManager();
+          break;
+
+        case "Remove Employee":
+          removeEmployee();
+          break;
+
+        case "Remove Role":
+          removeRole();
+          break;
+
+        case "Remove Department":
+          removeDepartment();
+          break;
+
+        case "Exit":
+          exit();
       }
     });
 }
+
+//         default:
+//           console.log("Thank you for using the application!");
+//       }
+//     });
+// }
 
 function viewAllEmployees() {
   connection.query("SELECT * FROM employee", (err, res) => {
@@ -81,13 +127,10 @@ function viewAllEmployees() {
     promptUser();
   });
 
-  function viewAllEmployeesByDepartment() {
-    connection.query(, (err, res) => {
-if(err) throw err;
-console.table(res);
-promptUser();
-    });
-  
+  //   function viewAllEmployeesByDepartment() {
+  //     // connection.query(, (err, res) => {
+  // if(err) throw err;
+  // console.table(res);
+  // promptUser();
+  //     // });
 }
-
-
