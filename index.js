@@ -120,17 +120,107 @@ function promptUser() {
 // }
 
 function viewAllEmployees() {
-  connection.query("SELECT * FROM employee", (err, res) => {
+  var query = "SELECT * FROM employee";
+  connection.query(query, function(err, res) {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
     promptUser();
   });
+}
 
-  //   function viewAllEmployeesByDepartment() {
-  //     // connection.query(, (err, res) => {
-  // if(err) throw err;
-  // console.table(res);
-  // promptUser();
-  //     // });
+function viewAllRoles() {
+  var query = "SELECT * FROM employee_trackerDB.role";
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    promptUser();
+  });
+}
+
+function viewAllDepartments() {
+  var query = "SELECT * FROM employee_tracker.DB.role";
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    promptUser();
+  });
+}
+
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+        name: "firstName",
+        type: "input",
+        message: "Input employee's first name."
+      },
+      {
+        name: "lastName",
+        type: "input",
+        message: "Input employee's last name."
+      },
+      {
+        name: "role_id",
+        type: "input",
+        message: "Input employee's role ID."
+      },
+      {
+        name: "manager_id",
+        type: "number",
+        message:
+          "Input the manager ID of the employee. ** Leave blank if none **"
+      }
+    ])
+
+    .then(function(answer) {
+      let manager_id = answer.manager_id;
+      if (!answer.manager_id) {
+        manager_id = null;
+      }
+      const query =
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
+      connection.query(
+        query,
+        [answer.firstName, answer.lastName, answer.role_id, manager_id],
+        function(err, res) {
+          console.log("You added a new employee");
+          promptUser();
+        }
+      );
+    });
+}
+
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        name: "role",
+        type: "input",
+        message: "Input name of new role/position."
+      },
+      {
+        name: "salary",
+        type: "input",
+        message: "Input the salary for this role."
+      },
+      {
+        name: "department_id",
+        type: "input",
+        message: "Input the department ID."
+      }
+    ])
+
+    .then(function(answer) {
+      const query =
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)";
+      connection.query(
+        query,
+        [answer.role, answer.salary, answer.department_id],
+        function(err, res) {
+          console.log("You added a new role");
+          promptUser();
+        }
+      );
+    });
 }
