@@ -224,3 +224,59 @@ function addRole() {
       );
     });
 }
+
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "department",
+        type: "input",
+        message: "Input the name of new department"
+      }
+    ])
+
+    .then(function(answer) {
+      const query =
+        "INSERT INTO department (title, salary, department_id) VALUES (?)";
+      connection.query(query, [answer.department], function(err, res) {
+        console.log("You added a new department");
+        promptUser();
+      });
+    });
+}
+
+function updateEmployeeRole() {
+  inquirer
+    .prompt([
+      {
+        name: "first_name",
+        type: "input",
+        message: "Input first name of employee"
+      },
+      {
+        name: "last_name",
+        type: "input",
+        message: "Input last name of employee"
+      },
+      {
+        name: "role",
+        type: "number",
+        message: "Input new ID number"
+      }
+    ])
+
+    .then(function(answer) {
+      var query =
+        "UPDATE employee SET role_id=? WHERE (first_name=? AND last_name=?)";
+      connection.query(
+        query,
+        [answer.first_name, answer.last_name, answer.role],
+        function(err, res) {
+          console.table("You updated the employee's role");
+          promptUser();
+        }
+      );
+    });
+}
+
+function updateEmployeeManager() {}
