@@ -1,22 +1,11 @@
 INSERT INTO department (name) 
-VALUES ('Accounting'),
-
-INSERT INTO department (name)
-VALUES ('HR'),
-
-INSERT INTO department (name)
-VALUES ('Sales'),
-
-INSERT INTO department (name)
-VALUES ('Engineering'),
-
-INSERT INTO department (name)
-VALUES ('Finance'),
-
-INSERT INTO department (name) 
-VALUES ('Legal')
-
--- look into syntax for mulitple inserts
+VALUES 
+('Accounting'),
+('HR'),
+('Sales'),
+('Engineering'),
+('Finance'),
+('Marketing');
 
 INSERT INTO role (title, salary, department_id)
 VALUES ('Accountant', 97000, 1), ('Recruiter', 60000, 2), ('Account Executive', 85000, 3)

@@ -382,3 +382,8 @@ function removeDepartment() {
       });
     });
 }
+
+function Exit() {
+  console.log("Application logging off");
+  connection.end();
+}
