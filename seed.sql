@@ -11,9 +11,9 @@ VALUES
 
 INSERT INTO role (title, salary, department_id)
 VALUES 
-('Account Executive', 85000, 1)
-('Sales Manager', 91000, 1)
-('Accountant', 97000, 2)
+('Account Executive', 85000, 1),
+('Sales Manager', 91000, 1),
+('Accountant', 97000, 2),
 ('Recruiter', 64000, 3), 
 ('Full Stack Developer', 120000, 4),
 ('Lawyer', 150000, 5),
@@ -26,4 +26,4 @@ VALUES
 ('Ari', 'Horowitz', 2, null),
 ('Kobe', 'Bryant', 1, 2),
 ('Tiger', 'Woods', 3, 2),
-('Serena', 'Williams', 5, null),
+('Serena', 'Williams', 5, null);

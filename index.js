@@ -3,21 +3,7 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const CFonts = require("cfonts");
-const consoleTable = require("console.table");
-const db = require("./db");
-
-CFonts.say("Employee|Tracker", {
-  font: "block", // define the font face
-  align: "left", // define text alignment
-  colors: ["system"], // define all colors
-  background: "transparent", // define the background color, you can also use `backgroundColor` here as key
-  letterSpacing: 1, // define letter spacing
-  lineHeight: 1, // define the line height
-  space: true, // define if the output text should have empty lines on top and on the bottom
-  maxLength: "0", // define how many character can be on one line
-  gradient: false, // define your two gradient colors
-  independentGradient: false // define if you want to recalculate the gradient for each new line
-});
+const cTable = require("console.table");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -37,6 +23,21 @@ connection.connect(err => {
   if (err) throw err;
   promptUser();
 });
+
+CFonts.say("Employee|Tracker", {
+  font: "block", // define the font face
+  align: "left", // define text alignment
+  colors: ["system"], // define all colors
+  background: "transparent", // define the background color, you can also use `backgroundColor` here as key
+  letterSpacing: 1, // define letter spacing
+  lineHeight: 1, // define the line height
+  space: true, // define if the output text should have empty lines on top and on the bottom
+  maxLength: "0", // define how many character can be on one line
+  gradient: false, // define your two gradient colors
+  independentGradient: false // define if you want to recalculate the gradient for each new line
+});
+
+console.log("Welcome to the Employee Tracker application!");
 
 function promptUser() {
   inquirer
@@ -61,6 +62,7 @@ function promptUser() {
         ]
       }
     ])
+
     .then(action => {
       switch (action.request) {
         case "View All Employees":
@@ -113,14 +115,12 @@ function promptUser() {
     });
 }
 
-//         default:
-//           console.log("Thank you for using the application!");
-//       }
-//     });
-// }
+// default:
+//   console.log("Thank you for using the application!");
 
 function viewAllEmployees() {
   var query = "SELECT * FROM employee";
+  console.log(query);
   connection.query(query, function(err, res) {
     if (err) throw err;
     // Log all results of the SELECT statement
@@ -139,7 +139,7 @@ function viewAllRoles() {
 }
 
 function viewAllDepartments() {
-  var query = "SELECT * FROM employee_tracker.DB.role";
+  var query = "SELECT * FROM employee_trackerDB.role";
   connection.query(query, function(err, res) {
     if (err) throw err;
     console.table(res);
@@ -383,7 +383,7 @@ function removeDepartment() {
     });
 }
 
-function Exit() {
+function exit() {
   console.log("Application logging off");
   connection.end();
 }
