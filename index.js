@@ -3,10 +3,10 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const CFonts = require("cfonts");
-const cTable = require("console.table");
+const consoleTable = require("console.table");
 const db = require('./db');
 
-CFonts.say("Employee|Manager", {
+CFonts.say("Employee|Tracker", {
   font: "block", // define the font face
   align: "left", // define text alignment
   colors: ["system"], // define all colors
@@ -47,12 +47,16 @@ function promptUser() {
         message: "What would you like to do?",
         choices: [
           "View All Employees",
-          "View All Employees By Department",
-          "View All Employees By Manager",
+          "View All Roles",
+          "View All Departments",
           "Add Employee",
-          "Remove Employee",
+          "Add Role",
+          "Add Department",
           "Update Employee Role",
           "Update Employee Manager",
+          "Remove Employee",
+          "Remove Role",
+          "Remove Department",
           "Exit"
         ]
       }
@@ -86,4 +90,4 @@ promptUser();
   
 }
 
-//conection.end at very very end of functions
+
