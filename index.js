@@ -279,4 +279,106 @@ function updateEmployeeRole() {
     });
 }
 
-function updateEmployeeManager() {}
+function updateEmployeeManager() {
+  inquirer
+    .prompt([
+      {
+        name: "first_name",
+        type: "input",
+        message: "Input first name of employee"
+      },
+      {
+        name: "last_name",
+        type: "input",
+        message: "Input last name of employee"
+      },
+      {
+        name: "manager_id",
+        type: "number",
+        message:
+          "Input new manager id number of employee. ** Leave blank if none **"
+      }
+    ])
+
+    .then(function(answer) {
+      let manager_id = answer.manager_id;
+      if (!answer.manager_id) {
+        manager_id = null;
+      }
+      var query =
+        "UPDATE employee SET manager_id=? WHERE (first_name=? AND last_name=?)";
+      connection.query(
+        query,
+        [answer.first_name, answer.last_name, manager_id],
+        function(err, res) {
+          console.table("You updated the employee's manager number!");
+          promptUser();
+        }
+      );
+    });
+}
+
+function removeEmployee() {
+  inquirer
+    .prompt([
+      {
+        name: "first_name",
+        type: "input",
+        message: "Input employee first name"
+      },
+      {
+        name: "last_name",
+        type: "input",
+        message: "Input employee last name"
+      }
+    ])
+
+    .then(function(answer) {
+      var query = "DELETE FROM employee WHERE (first_name=? AND last_name=?)";
+      connection.query(query, [answer.first_name, answer.last_name], function(
+        err,
+        res
+      ) {
+        console.table("Employee fired!");
+        promptUser();
+      });
+    });
+}
+
+function removeRole() {
+  inquirer
+    .prompt([
+      {
+        name: "role",
+        type: "input",
+        message: "Input the role"
+      }
+    ])
+
+    .then(function(answer) {
+      var query = "DELETE FROM role WHERE (title=?)";
+      connection.query(query, [answer.role], function(err, res) {
+        console.table("Role vanished!");
+        promptUser();
+      });
+    });
+}
+
+function removeDepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "department",
+        type: "input",
+        message: "Input the department"
+      }
+    ])
+
+    .then(function(answer) {
+      var query = "DELETE FROM department WHERE (name=?)";
+      connection.query(query, [answer.department], function(err, res) {
+        console.table("Department has downsized!");
+        promptUser();
+      });
+    });
+}
