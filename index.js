@@ -139,7 +139,7 @@ function viewAllRoles() {
 }
 
 function viewAllDepartments() {
-  var query = "SELECT * FROM employee_trackerDB.role";
+  var query = "SELECT * FROM employee_trackerDB.department";
   connection.query(query, function(err, res) {
     if (err) throw err;
     console.table(res);
