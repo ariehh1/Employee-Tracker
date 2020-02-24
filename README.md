@@ -1,4 +1,4 @@
-# Employee-Tracker (https://github.com/ariehh1/Employee-Tracker)
+# [Employee-Tracker](https://github.com/ariehh1/Employee-Tracker)
 
 In this repository, I have created a command line application that allows users to track their company's employees. Using node, inquirer, and MySQL, the user is guided through a set of prompts to uncover their employees, roles, and departments. This interface is an example of a Content Management System which make it easier for non-developers to view and interact with information stored in databases.
 
